@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./style.css" />
+
+        <title>WhatsApp</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="flex align-center gap-1">
+                <img
+                    src="https://scontent.fbdq2-1.fna.fbcdn.net/v/t39.8562-6/198910979_948097475966986_5716962361479039234_n.png?_nc_cat=106&ccb=1-5&_nc_sid=6825c5&_nc_ohc=AmA-2N4gf0EAX_jk4qs&_nc_ht=scontent.fbdq2-1.fna&oh=ea0fe8f48cae75f803a9000dbc5e0774&oe=614F4180"
+                    alt="WhatsApp Icon"
+                    class="logo"
+                />
+                <h2>WhatsApp</h2>
+            </div>
+        </div>
+        <p class="mt-1 text-center">
+            Send message to anyone without saving the contact number
+        </p>
+        <div class="flex mt-1 flex-col">
+            <input type="number" id="mobileNumber" pattern="[0-9]{10}" />
+            <button id="sendBtn">Send</button>
+        </div>
+        <p class="mt-1 text-center op-5">Don't include country code</p>
+
+        <script>
+            const inputElement = document.getElementById('mobileNumber')
+            const btn = document.getElementById('sendBtn')
+
+            btn.addEventListener('click', (event) => {
+                event.preventDefault()
+                let inputVal = inputElement.value
+                if (inputVal.length === 10 && !isNaN(inputVal)) {
+                    window.location.replace(
+                        `https://api.whatsapp.com/send?phone=+91${inputElement.value}`
+                    )
+                } else {
+                    alert('Please enter valid mobile number')
+                }
+            })
+            inputElement.addEventListener('keyup', (event) => {
+                if (event.keyCode === 13) {
+                    event.preventDefault()
+                    btn.click()
+                }
+            })
+        </script>
+    </body>
+</html>
